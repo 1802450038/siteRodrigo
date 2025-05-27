@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Removedor de Fundo Branco</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .btn-upload {
+            border: 2px solid gray;
+            color: gray;
+            background-color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        #imageCanvas {
+            display: none; /* O canvas é usado para processamento, não precisa ser visível */
+        }
+        #processedImageContainer img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #09f;
+            animation: spin 1s ease infinite;
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-6">
+
+    <div class="bg-white p-8 md:p-12 rounded-xl shadow-2xl w-full max-w-2xl text-center">
+        <header class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800">Removedor de Fundo Branco</h1>
+            <p class="text-gray-600 mt-2">Envie uma imagem para remover o fundo branco.</p>
+        </header>
+
+        <div class="upload-btn-wrapper mb-6">
+            <button class="btn-upload hover:bg-gray-100 transition-colors">Escolher Imagem</button>
+            <input type="file" id="imageUpload" accept="image/png, image/jpeg, image/jpg" />
+        </div>
+
+        <div id="statusMessage" class="text-gray-500 mb-4 min-h-[20px]"></div>
+        <div id="loadingIndicator" class="flex justify-center items-center mb-4 hidden">
+            <div class="spinner"></div>
+            <p class="ml-2 text-gray-700">Processando imagem...</p>
+        </div>
+
+
+        <canvas id="imageCanvas"></canvas>
+
+        <div id="originalImageContainer" class="mb-6 hidden">
+            <h2 class="text-xl font-semibold text-gray-700 mb-2">Imagem Original:</h2>
+            <img id="originalImage" src="#" alt="Imagem Original" class="mx-auto rounded-lg shadow-md max-w-xs md:max-w-sm" />
+        </div>
+
+        <div id="processedImageContainer" class="mb-6 hidden">
+            <h2 class="text-xl font-semibold text-gray-700 mb-2">Imagem Processada:</h2>
+            <img id="processedImage" src="#" alt="Imagem Processada" class="mx-auto rounded-lg shadow-md bg-slate-300 max-w-xs md:max-w-sm" />
+            <a id="downloadLink" href="#" download="imagem_sem_fundo.png" class="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-transform transform hover:scale-105">
+                Baixar Imagem Processada
+            </a>
+        </div>
+
+         <div id="errorMessage" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4" role="alert">
+            <strong class="font-bold">Erro!</strong>
+            <span class="block sm:inline" id="errorText"></span>
+        </div>
+
+        <p class="text-xs text-gray-500 mt-8">
+            Nota: A precisão da remoção do fundo pode variar dependendo da complexidade da imagem e da "brancura" do fundo. Funciona melhor com fundos brancos sólidos.
+        </p>
+    </div>
+
+    <script>
+        const imageUpload = document.getElementById('imageUpload');
+        const imageCanvas = document.getElementById('imageCanvas');
+        const ctx = imageCanvas.getContext('2d');
+        const originalImageContainer = document.getElementById('originalImageContainer');
+        const originalImage = document.getElementById('originalImage');
+        const processedImageContainer = document.getElementById('processedImageContainer');
+        const processedImage = document.getElementById('processedImage');
+        const downloadLink = document.getElementById('downloadLink');
+        const statusMessage = document.getElementById('statusMessage');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const errorMessage = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
+
+        // Limite de tolerância para o branco (0-255). Valores mais altos são mais tolerantes.
+        const tolerance = 20; // Quão próximo de branco puro (255,255,255) um pixel deve ser para ser removido
+
+        imageUpload.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                // Reset UI
+                originalImageContainer.classList.add('hidden');
+                processedImageContainer.classList.add('hidden');
+                errorMessage.classList.add('hidden');
+                statusMessage.textContent = 'Carregando imagem...';
+                loadingIndicator.classList.remove('hidden');
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        try {
+                            statusMessage.textContent = 'Processando imagem...';
+                            originalImage.src = img.src;
+                            originalImageContainer.classList.remove('hidden');
+
+                            // Definir dimensões do canvas
+                            imageCanvas.width = img.width;
+                            imageCanvas.height = img.height;
+
+                            // Desenhar imagem no canvas
+                            ctx.drawImage(img, 0, 0);
+
+                            // Obter dados dos pixels
+                            const imageData = ctx.getImageData(0, 0, imageCanvas.width, imageCanvas.height);
+                            const data = imageData.data;
+
+                            // Iterar sobre cada pixel
+                            for (let i = 0; i < data.length; i += 4) {
+                                const r = data[i];
+                                const g = data[i + 1];
+                                const b = data[i + 2];
+                                // const a = data[i + 3]; // Alpha original
+
+                                // Verificar se o pixel é "branco" dentro da tolerância
+                                if (r > (255 - tolerance) && g > (255 - tolerance) && b > (255 - tolerance)) {
+                                    data[i + 3] = 0; // Tornar transparente (definir alfa para 0)
+                                }
+                            }
+
+                            // Colocar os dados modificados de volta no canvas
+                            ctx.putImageData(imageData, 0, 0);
+
+                            // Mostrar a imagem processada
+                            const processedImageUrl = imageCanvas.toDataURL('image/png');
+                            processedImage.src = processedImageUrl;
+                            downloadLink.href = processedImageUrl;
+                            processedImageContainer.classList.remove('hidden');
+                            statusMessage.textContent = 'Processamento concluído!';
+                        } catch (err) {
+                            console.error("Erro durante o processamento da imagem:", err);
+                            errorText.textContent = `Ocorreu um erro ao processar a imagem: ${err.message}. Tente novamente ou com outra imagem.`;
+                            errorMessage.classList.remove('hidden');
+                            statusMessage.textContent = 'Falha no processamento.';
+                        } finally {
+                            loadingIndicator.classList.add('hidden');
+                        }
+                    };
+                    img.onerror = () => {
+                        console.error("Erro ao carregar a imagem.");
+                        errorText.textContent = "Não foi possível carregar o arquivo de imagem. Verifique se é um formato válido (PNG, JPG).";
+                        errorMessage.classList.remove('hidden');
+                        statusMessage.textContent = 'Falha ao carregar imagem.';
+                        loadingIndicator.classList.add('hidden');
+                    };
+                    img.src = e.target.result;
+                };
+                reader.onerror = () => {
+                    console.error("Erro ao ler o arquivo.");
+                    errorText.textContent = "Ocorreu um erro ao ler o arquivo. Tente novamente.";
+                    errorMessage.classList.remove('hidden');
+                    statusMessage.textContent = 'Falha ao ler arquivo.';
+                    loadingIndicator.classList.add('hidden');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                statusMessage.textContent = 'Nenhuma imagem selecionada.';
+            }
+        });
+    </script>
+</body>
+</html>

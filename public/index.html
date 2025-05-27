@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacifico Saldanha & Advogados Associados - Início</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        .hero-bg-content {
+            background-color: #F0F4F8; 
+        }
+        .primary-color {
+            color: #0A2A4D; 
+        }
+        .secondary-color {
+            color: #C0A062; 
+        }
+        .btn-primary {
+            background-color: #0A2A4D;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #08223F;
+        }
+        .btn-secondary {
+            background-color: #C0A062;
+            color: #0A2A4D;
+        }
+        .btn-secondary:hover {
+            background-color: #B09052;
+        }
+        .footer-bg {
+            background-color: #0A2A4D;
+        }
+        .social-icon svg { 
+            width: 24px;
+            height: 24px;
+            fill: white;
+            transition: fill 0.3s ease;
+        }
+        .social-icon:hover svg {
+            fill: #C0A062; 
+        }
+
+        .initial-social-icon svg { 
+            fill: #0A2A4D; /* Icons inside blurred container will be dark blue */
+            transition: fill 0.3s ease, transform 0.3s ease;
+        }
+        .initial-social-icon:hover svg {
+            fill: #C0A062; 
+            transform: scale(1.1);
+        }
+         /* Text color for social icon names inside blurred container */
+        .initial-social-icon-text {
+            color: #0A2A4D; /* primary-color */
+        }
+        .initial-social-icon:hover .initial-social-icon-text {
+            color: #C0A062; /* secondary-color on hover */
+        }
+
+
+        .scroll-down-icon {
+            width: 30px;
+            height: 50px;
+            border: 2px solid #0A2A4D; 
+            border-radius: 50px;
+            position: relative;
+            animation: scroll-animation 2s infinite;
+            filter: blur(0.5px); 
+        }
+        .scroll-down-icon::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            margin-left: -3px;
+            background-color: #0A2A4D; 
+            border-radius: 100%;
+            animation: scroll-dot-animation 2s infinite;
+        }
+        @keyframes scroll-animation {
+            0% { opacity: 1; transform: translateY(0); }
+            50% { opacity: 0.5; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scroll-dot-animation {
+            0% { transform: translateY(0); opacity: 0; }
+            25% { opacity: 1; }
+            50% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 0; }
+        }
+
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        .modal-content {
+            max-height: 90vh;
+        }
+
+        .team-card {
+            background-color: white;
+            border-radius: 0.5rem; 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+            padding: 1.5rem; 
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .team-member-img {
+            width: 100px; 
+            height: 100px; 
+            border-radius: 9999px; 
+            object-fit: cover;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 1rem; 
+            border: 3px solid #C0A062; 
+        }
+        .btn-email {
+            background-color: #0A2A4D; 
+            color: white;
+            padding-top: 0.5rem; 
+            padding-bottom: 0.5rem; 
+            padding-left: 1rem; 
+            padding-right: 1rem; 
+            border-radius: 0.375rem; 
+            font-size: 0.875rem; 
+            font-weight: 500; 
+            transition: background-color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            margin-top: auto; 
+        }
+        .btn-email:hover {
+            background-color: #08223F; 
+        }
+        .btn-email svg {
+            margin-right: 0.5rem; 
+        }
+        .publication-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1);
+            padding: 1.5rem;
+            transition: box-shadow 0.3s ease;
+        }
+        .publication-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.1);
+        }
+
+        #animated-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Behind the content container */
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <section id="initial-hero" class="h-screen relative flex flex-col items-center justify-center text-center p-6 overflow-hidden">
+        <canvas id="animated-background"></canvas>
+        <div class="relative z-10 bg-primary-color/20 dark:bg-primary-color/10 backdrop-blur-sm rounded-2xl shadow-2xl p-6 sm:p-8 md:p-10 text-center">
+            <div class="mb-6 md:mb-8">
+             <img src="_assets/fundo2.png" alt="Logo Pacifico Saldanha & Advogados Associados" class="h-24 sm:h-28 md:h-32 lg:h-36 mx-auto" onerror="this.onerror=null;this.src='https://placehold.co/200x100/FFFFFF/CCCCCC?text=Logo+Indisponível';">
+            </div>
+
+            <div class="flex justify-center space-x-4 sm:space-x-6">
+            <a href="https://instagram.com/SEU_USUARIO_INSTAGRAM" target="_blank" class="initial-social-icon flex flex-col items-center group" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" class="mb-1 w-7 h-7 md:w-8 md:h-8"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4A3.6,3.6 0 0,0 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6A3.6,3.6 0 0,0 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg>
+                <span class="text-xs md:text-sm initial-social-icon-text group-hover:secondary-color transition-colors duration-300 font-medium">Instagram</span>
+            </a>
+            <a href="https://wa.me/SEUNUMEROWHATSAPP" target="_blank" class="initial-social-icon flex flex-col items-center group" aria-label="WhatsApp">
+                <svg viewBox="0 0 24 24" class="mb-1 w-7 h-7 md:w-8 md:h-8"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.33 3.43 16.79L2.05 22L7.31 20.5C8.75 21.31 10.36 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 9.31 20.95 6.91 19.21 5.18C17.48 3.44 15.08 2 12.04 2M12.04 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.43 7.65 20.29 9.72 20.29 11.91C20.29 16.47 16.63 20.13 12.04 20.13C10.52 20.13 9.08 19.72 7.82 19L7.43 18.78L4.73 19.53L5.5 16.89L5.27 16.5C4.42 15.18 3.79 13.59 3.79 11.91C3.79 7.35 7.45 3.67 12.04 3.67M9.12 7.71L8.09 7.72C7.58 7.72 7.13 7.79 6.79 7.9L6.73 7.92C6.44 8.04 6.14 8.24 5.91 8.5C5.64 8.79 5.46 9.12 5.38 9.32C5.29 9.52 5.24 9.86 5.26 10.28C5.29 10.71 5.41 11.11 5.59 11.43C5.73 11.69 5.96 12.03 6.3 12.5C6.81 13.17 7.41 13.91 8.12 14.7C9.22 15.9 10.12 16.63 10.92 17.09C11.21 17.25 11.51 17.37 11.83 17.46C12.2 17.56 12.53 17.58 12.81 17.53C13.21 17.46 13.61 17.26 13.91 16.93C14.25 16.56 14.46 16.12 14.53 15.78C14.61 15.42 14.62 15.04 14.56 14.65L14.45 13.8L13.76 13.52C13.53 13.41 13.25 13.34 12.93 13.46C12.62 13.58 12.42 13.82 12.21 14.16C12.02 14.48 11.85 14.62 11.62 14.72C11.39 14.82 11.18 14.82 10.96 14.7C10.75 14.58 10.29 14.32 9.71 13.7C9.02 12.98 8.53 12.21 8.29 11.78C8.2 11.58 8.12 11.39 8.14 11.19C8.16 10.99 8.26 10.82 8.41 10.67C8.55 10.52 8.71 10.41 8.88 10.35C9.05 10.28 9.21 10.28 9.35 10.32L10.06 10.5H10.18L10.1 9.74C10.06 9.39 9.93 9.03 9.76 8.7C9.62 8.42 9.4 8.17 9.12 7.99V7.98L9.12 7.71Z"/></svg>
+                <span class="text-xs md:text-sm initial-social-icon-text group-hover:secondary-color transition-colors duration-300 font-medium">WhatsApp</span>
+            </a>
+            <a href="https://facebook.com/SUA_PAGINA_FACEBOOK" target="_blank" class="initial-social-icon flex flex-col items-center group" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" class="mb-1 w-7 h-7 md:w-8 md:h-8"><path d="M12 2.04C6.48 2.04 2 6.52 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.81C10.44 7.31 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.52 17.52 2.04 12 2.04Z"/></svg>
+                <span class="text-xs md:text-sm initial-social-icon-text group-hover:secondary-color transition-colors duration-300 font-medium">Facebook</span>
+            </a>
+            </div>
+        </div>
+
+        <a href="#header-nav" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10">
+            <div class="scroll-down-icon"></div>
+        </a>
+    </section>
+
+    <header id="header-nav" class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#initial-hero" class="flex items-center">
+                <img src="./_assets/logo.png" alt="Logo Pacifico Advocacia" class="h-10 md:h-12 mr-3" onerror="this.onerror=null;this.src='https://placehold.co/100x50/FFFFFF/CCCCCC?text=Logo';">
+            </a>
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="#initial-hero" class="text-gray-700 hover:primary-color font-medium">Início</a>
+                <a href="#sobre" class="text-gray-700 hover:primary-color font-medium">Sobre Nós</a>
+                <a href="#servicos" class="text-gray-700 hover:primary-color font-medium">Áreas de Atuação</a>
+                <a href="#publicacoes" class="text-gray-700 hover:primary-color font-medium">Publicações</a>
+                <a href="#contato" class="text-gray-700 hover:primary-color font-medium">Contato</a>
+                <a href="#" id="openModalBtnHeader" class="btn-secondary py-2 px-4 rounded-lg font-medium text-sm">Agende uma Consulta</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <a href="#initial-hero" class="block px-6 py-3 text-gray-700 hover:bg-gray-100 hover:primary-color font-medium">Início</a>
+            <a href="#sobre" class="block px-6 py-3 text-gray-700 hover:bg-gray-100 hover:primary-color font-medium">Sobre Nós</a>
+            <a href="#servicos" class="block px-6 py-3 text-gray-700 hover:bg-gray-100 hover:primary-color font-medium">Áreas de Atuação</a>
+            <a href="#publicacoes" class="block px-6 py-3 text-gray-700 hover:bg-gray-100 hover:primary-color font-medium">Publicações</a>
+            <a href="#contato" class="block px-6 py-3 text-gray-700 hover:bg-gray-100 hover:primary-color font-medium">Contato</a>
+            <a href="#" id="openModalBtnMobile" class="block px-6 py-3 btn-secondary text-center rounded-none font-medium">Agende uma Consulta</a>
+        </div>
+    </header>
+
+    <section class="hero-bg-content py-20 md:py-32">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-5xl font-bold primary-color mb-6 leading-tight">
+                Assessoria Jurídica de Confiança e Excelência
+            </h2>
+            <p class="text-lg md:text-xl text-gray-700 mb-10 max-w-2xl mx-auto">
+                Compromisso, ética e resultados. Encontre a solução jurídica ideal para suas necessidades com nossa equipe de especialistas.
+            </p>
+            <a href="#" id="openModalBtnContentHero" class="btn-primary py-3 px-8 rounded-lg text-lg font-semibold hover:shadow-lg transform hover:scale-105 transition duration-300">
+                Entre em Contato
+            </a>
+        </div>
+    </section>
+
+    <section id="sobre" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-start gap-x-12">
+                <div class="lg:w-2/5 mb-12 lg:mb-0">
+                    <h2 class="text-3xl md:text-4xl font-bold primary-color mb-6">Sobre Nós</h2>
+                    <p class="text-gray-700 mb-4 leading-relaxed" style="font-size: 16pt;">
+                        Originário do escritório profissional do Advogado Pacífico Luiz Saldanha em trabalho iniciado no ano de 1987, ao longo dos anos conquistou a confiança dos clientes e o respeito dos colegas, bem como dos membros do Poder Judiciário e da Administração Pública.
+                    </p>
+                    <p class="text-gray-700 mb-6 leading-relaxed" style="font-size: 16pt;">
+                        Iniciou seu trabalho com ênfase na área trabalhista, contando hoje com profissionais especializados e capacitados para enfrentar demandas em diversas áreas jurídicas.
+                    </p>
+                    <a href="#servicos" class="text-lg font-medium secondary-color hover:underline">Conheça nossas áreas de atuação →</a>
+                </div>
+                <div class="lg:w-3/5">
+                    <h3 class="text-2xl md:text-3xl font-bold primary-color mb-8 text-center lg:text-left">Nossa Equipe de Sócios</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
+                        <div class="team-card md:col-span-1 bg-gray-50 p-8">
+                            <img src="https://placehold.co/120x120/0A2A4D/FFFFFF?text=PLS" alt="Foto do Dr. Pacífico Luiz Saldanha" class="team-member-img w-28 h-28" onerror="this.onerror=null;this.src='https://placehold.co/120x120/CCCCCC/FFFFFF?text=Foto';">
+                            <h4 class="text-2xl font-semibold primary-color mb-1">Dr. Pacífico Luiz Saldanha</h4>
+                            <p class="text-md secondary-color mb-1">Sócio Fundador</p>
+                            <p class="text-sm text-gray-500 mb-3">OAB/RS 14.920</p>
+                            <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                                Com vasta experiência e dedicação desde 1987, Dr. Pacífico é a pedra angular do escritório, reconhecido por sua ética e resultados exemplares, especialmente na área trabalhista e consultoria estratégica.
+                            </p>
+                            <a href="mailto:pacifico@pacificosaldanha.com.br" class="btn-email">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                                Enviar Email
+                            </a>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-8">
+                        <div class="team-card">
+                            <img src="https://placehold.co/100x100/C0A062/0A2A4D?text=FLS" alt="Foto do Dr. Flávio Luiz Saldanha" class="team-member-img" onerror="this.onerror=null;this.src='https://placehold.co/100x100/CCCCCC/FFFFFF?text=Foto';">
+                            <h4 class="text-xl font-semibold primary-color mb-1">Dr. Flávio Luiz Saldanha</h4>
+                            <p class="text-sm secondary-color mb-1">Sócio</p>
+                            <p class="text-xs text-gray-500 mb-3">OAB/RS 27.862</p>
+                            <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                                Especialista em [Principal Área do Flávio], Dr. Flávio combina conhecimento técnico com uma abordagem prática na resolução de litígios.
+                            </p>
+                            <a href="mailto:flavio@pacificosaldanha.com.br" class="btn-email">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                                Enviar Email
+                            </a>
+                        </div>
+                        <div class="team-card">
+                            <img src="https://placehold.co/100x100/0A2A4D/C0A062?text=ROS" alt="Foto do Dr. Rodrigo Ortiz Saldanha" class="team-member-img" onerror="this.onerror=null;this.src='https://placehold.co/100x100/CCCCCC/FFFFFF?text=Foto';">
+                            <h4 class="text-xl font-semibold primary-color mb-1">Dr. Rodrigo Ortiz Saldanha</h4>
+                            <p class="text-sm secondary-color mb-1">Sócio</p>
+                            <p class="text-xs text-gray-500 mb-3">OAB/RS 63.472</p>
+                            <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                                Dr. Rodrigo traz uma perspectiva inovadora para [Principal Área do Rodrigo], com foco em soluções jurídicas eficientes e personalizadas.
+                            </p>
+                            <a href="mailto:rodrigo@pacificosaldanha.com.br" class="btn-email">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                                Enviar Email
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicos" class="py-16 md:py-24 hero-bg-content">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold primary-color text-center mb-12">Nossas Áreas de Atuação</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-10 h-10 secondary-color mr-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.84l-7-3zM3.11 9.051L2 9.584V13a1 1 0 001 1h14a1 1 0 001-1V9.584l-1.11.531a1 1 0 01-.97-.052l-4-1.714a1 1 0 00-.788 0l-4 1.714a1 1 0 01-.97.052zM15 11H5V9.584l3.958-1.697a1 1 0 01.393-.107l.585.25a1 1 0 00.832 0l.585-.25a1 1 0 01.393.107L15 9.584V11z"></path></svg>
+                        <h3 class="text-xl font-semibold primary-color">Direito Civil</h3>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed">Consultoria e contencioso em contratos, responsabilidade civil, família, sucessões e mais.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                     <div class="flex items-center mb-4">
+                        <svg class="w-10 h-10 secondary-color mr-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm12 6a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4a2 2 0 012-2h8zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H13zm-2-2a1 1 0 011 1v.01a1 1 0 11-2 0V13a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                        <h3 class="text-xl font-semibold primary-color">Direito Empresarial</h3>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed">Assessoria completa para empresas, desde a constituição até a resolução de conflitos societários.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                     <div class="flex items-center mb-4">
+                        <svg class="w-10 h-10 secondary-color mr-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path></svg>
+                        <h3 class="text-xl font-semibold primary-color">Direito do Trabalho</h3>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed">Defesa dos direitos de empregados e empregadores, consultoria preventiva e atuação em litígios.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="publicacoes" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold primary-color text-center mb-12">Publicações Relevantes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="publication-card">
+                    <h3 class="text-xl font-semibold primary-color mb-2">Título do Artigo ou Defesa 1</h3>
+                    <p class="text-gray-600 text-sm mb-4">Breve resumo do conteúdo do documento. Pode destacar o tema principal ou a relevância da publicação.</p>
+                    <a href="link_para_seu_pdf_1.pdf" target="_blank" class="btn-secondary py-2 px-4 rounded-md text-sm font-medium inline-flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
+                        Ler Documento (PDF)
+                    </a>
+                </div>
+                <div class="publication-card">
+                    <h3 class="text-xl font-semibold primary-color mb-2">Análise Jurídica Sobre Tema X</h3>
+                    <p class="text-gray-600 text-sm mb-4">Este artigo explora as nuances legais de [tema X], oferecendo insights valiosos para profissionais e interessados na área.</p>
+                    <a href="link_para_seu_pdf_2.pdf" target="_blank" class="btn-secondary py-2 px-4 rounded-md text-sm font-medium inline-flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
+                        Ler Documento (PDF)
+                    </a>
+                </div>
+                <div class="publication-card">
+                    <h3 class="text-xl font-semibold primary-color mb-2">Defesa Emblemática no Caso Y</h3>
+                    <p class="text-gray-600 text-sm mb-4">Estudo de caso detalhando a estratégia e os resultados obtidos em uma defesa significativa conduzida pelo nosso escritório.</p>
+                    <a href="link_para_seu_pdf_3.pdf" target="_blank" class="btn-secondary py-2 px-4 rounded-md text-sm font-medium inline-flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
+                        Ler Documento (PDF)
+                    </a>
+                </div>
+                </div>
+        </div>
+    </section>
+
+    <section id="contato" class="py-16 md:py-24 bg-gray-800 text-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Pronto para dar o próximo passo?</h2>
+            <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+                <div class="lg:w-1/2 text-center lg:text-left">
+                    <p class="text-lg text-gray-300 mb-6">
+                        Entre em contato conosco para uma consulta inicial e descubra como podemos ajudar você a alcançar seus objetivos.
+                    </p>
+                    <div class="space-y-4 mb-8 lg:mb-0">
+                        <a href="mailto:contato@pacificosaldanha.com.br" class="bg-white text-gray-800 py-3 px-6 rounded-lg text-lg font-semibold hover:bg-gray-200 transition duration-300 flex items-center justify-center lg:justify-start w-full sm:w-auto">
+                            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                            contato@pacificosaldanha.com.br
+                        </a>
+                        <a href="tel:+55553412XXXX" class="border border-white text-white py-3 px-6 rounded-lg text-lg font-semibold hover:bg-white hover:text-gray-800 transition duration-300 flex items-center justify-center lg:justify-start w-full sm:w-auto">
+                            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+                            (55) 3412-XXXX </a>
+                    </div>
+                     <p class="text-gray-400 mt-4 text-sm">Nosso endereço: Rua Quinze de Novembro, 1402, Uruguaiana, RS, Brasil, CEP 97500-510</p>
+                </div>
+                <div class="lg:w-1/2 w-full">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3423.066858696065!2d-57.08989838486308!3d-29.75495798198593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x945208350543a9d7%3A0x7e90884310698689!2sR.%20XV%20de%20Novembro%2C%201402%20-%20Centro%2C%20Uruguaiana%20-%20RS%2C%2097500-510%2C%20Brazil!5e0!3m2!1sen!2sus!4v1621110000000!5m2!1sen!2sus" 
+                        width="100%" 
+                        height="350" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="rounded-lg shadow-xl">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-bg text-gray-300 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <img src="uploaded:pacificologo.png-5dd86754-9ffa-4afd-a7ae-85b4829998df" alt="Logo Pacifico Advocacia" class="h-12 mb-4 opacity-80" onerror="this.onerror=null;this.src='https://placehold.co/100x50/0A2A4D/FFFFFF?text=Logo';">
+                    <p class="text-sm">Pacifico Saldanha & Advogados Associados.</p>
+                    <p class="text-sm">Rua Quinze de Novembro, 1402 - Centro, Uruguaiana - RS</p>
+                    <p class="text-sm">CEP: 97500-510</p>
+                </div>
+                <div>
+                    <h5 class="text-lg font-semibold text-white mb-4">Links Rápidos</h5>
+                    <ul>
+                        <li class="mb-2"><a href="#sobre" class="hover:text-white">Sobre Nós</a></li>
+                        <li class="mb-2"><a href="#servicos" class="hover:text-white">Áreas de Atuação</a></li>
+                        <li class="mb-2"><a href="#publicacoes" class="hover:text-white">Publicações</a></li>
+                        <li class="mb-2"><a href="#contato" class="hover:text-white">Contato</a></li>
+                        <li class="mb-2"><a href="#" class="hover:text-white">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-lg font-semibold text-white mb-4">Siga-nos</h5>
+                    <div class="flex space-x-4">
+                        <a href="https://instagram.com/SEU_USUARIO_INSTAGRAM" target="_blank" class="social-icon" aria-label="Instagram">
+                           <svg viewBox="0 0 24 24"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4A3.6,3.6 0 0,0 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6A3.6,3.6 0 0,0 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg>
+                        </a>
+                         <a href="https://wa.me/SEUNUMEROWHATSAPP" target="_blank" class="social-icon" aria-label="WhatsApp">
+                            <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.33 3.43 16.79L2.05 22L7.31 20.5C8.75 21.31 10.36 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 9.31 20.95 6.91 19.21 5.18C17.48 3.44 15.08 2 12.04 2M12.04 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.43 7.65 20.29 9.72 20.29 11.91C20.29 16.47 16.63 20.13 12.04 20.13C10.52 20.13 9.08 19.72 7.82 19L7.43 18.78L4.73 19.53L5.5 16.89L5.27 16.5C4.42 15.18 3.79 13.59 3.79 11.91C3.79 7.35 7.45 3.67 12.04 3.67M9.12 7.71L8.09 7.72C7.58 7.72 7.13 7.79 6.79 7.9L6.73 7.92C6.44 8.04 6.14 8.24 5.91 8.5C5.64 8.79 5.46 9.12 5.38 9.32C5.29 9.52 5.24 9.86 5.26 10.28C5.29 10.71 5.41 11.11 5.59 11.43C5.73 11.69 5.96 12.03 6.3 12.5C6.81 13.17 7.41 13.91 8.12 14.7C9.22 15.9 10.12 16.63 10.92 17.09C11.21 17.25 11.51 17.37 11.83 17.46C12.2 17.56 12.53 17.58 12.81 17.53C13.21 17.46 13.61 17.26 13.91 16.93C14.25 16.56 14.46 16.12 14.53 15.78C14.61 15.42 14.62 15.04 14.56 14.65L14.45 13.8L13.76 13.52C13.53 13.41 13.25 13.34 12.93 13.46C12.62 13.58 12.42 13.82 12.21 14.16C12.02 14.48 11.85 14.62 11.62 14.72C11.39 14.82 11.18 14.82 10.96 14.7C10.75 14.58 10.29 14.32 9.71 13.7C9.02 12.98 8.53 12.21 8.29 11.78C8.2 11.58 8.12 11.39 8.14 11.19C8.16 10.99 8.26 10.82 8.41 10.67C8.55 10.52 8.71 10.41 8.88 10.35C9.05 10.28 9.21 10.28 9.35 10.32L10.06 10.5H10.18L10.1 9.74C10.06 9.39 9.93 9.03 9.76 8.7C9.62 8.42 9.4 8.17 9.12 7.99V7.98L9.12 7.71Z"/></svg>
+                        </a>
+                        <a href="https://facebook.com/SUA_PAGINA_FACEBOOK" target="_blank" class="social-icon" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.04C6.48 2.04 2 6.52 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.81C10.44 7.31 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.52 17.52 2.04 12 2.04Z"/></svg>
+                        </a>
+                        <a href="https://linkedin.com/company/SEU_LINKEDIN" target="_blank" class="social-icon" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-sm">
+                <p>© <span id="currentYear"></span> Pacifico Saldanha & Advogados Associados. Todos os direitos reservados.</p>
+                <p>Desenvolvido com <span class="secondary-color">♥</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="openWhatsAppModalBtn" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg z-40 transition-transform hover:scale-110">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.33 3.43 16.79L2.05 22L7.31 20.5C8.75 21.31 10.36 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 9.31 20.95 6.91 19.21 5.18C17.48 3.44 15.08 2 12.04 2M12.04 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.43 7.65 20.29 9.72 20.29 11.91C20.29 16.47 16.63 20.13 12.04 20.13C10.52 20.13 9.08 19.72 7.82 19L7.43 18.78L4.73 19.53L5.5 16.89L5.27 16.5C4.42 15.18 3.79 13.59 3.79 11.91C3.79 7.35 7.45 3.67 12.04 3.67M9.12 7.71L8.09 7.72C7.58 7.72 7.13 7.79 6.79 7.9L6.73 7.92C6.44 8.04 6.14 8.24 5.91 8.5C5.64 8.79 5.46 9.12 5.38 9.32C5.29 9.52 5.24 9.86 5.26 10.28C5.29 10.71 5.41 11.11 5.59 11.43C5.73 11.69 5.96 12.03 6.3 12.5C6.81 13.17 7.41 13.91 8.12 14.7C9.22 15.9 10.12 16.63 10.92 17.09C11.21 17.25 11.51 17.37 11.83 17.46C12.2 17.56 12.53 17.58 12.81 17.53C13.21 17.46 13.61 17.26 13.91 16.93C14.25 16.56 14.46 16.12 14.53 15.78C14.61 15.42 14.62 15.04 14.56 14.65L14.45 13.8L13.76 13.52C13.53 13.41 13.25 13.34 12.93 13.46C12.62 13.58 12.42 13.82 12.21 14.16C12.02 14.48 11.85 14.62 11.62 14.72C11.39 14.82 11.18 14.82 10.96 14.7C10.75 14.58 10.29 14.32 9.71 13.7C9.02 12.98 8.53 12.21 8.29 11.78C8.2 11.58 8.12 11.39 8.14 11.19C8.16 10.99 8.26 10.82 8.41 10.67C8.55 10.52 8.71 10.41 8.88 10.35C9.05 10.28 9.21 10.28 9.35 10.32L10.06 10.5H10.18L10.1 9.74C10.06 9.39 9.93 9.03 9.76 8.7C9.62 8.42 9.4 8.17 9.12 7.99V7.98L9.12 7.71Z"/></svg>
+    </button>
+
+    <div id="whatsAppModal" class="fixed inset-0 modal-backdrop items-center justify-center z-50 hidden">
+        <div class="bg-white p-6 md:p-8 rounded-lg shadow-2xl w-11/12 md:w-1/2 lg:w-1/3 modal-content overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-semibold primary-color">Contato via WhatsApp</h3>
+                <button id="closeWhatsAppModalBtn" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
+            </div>
+            <form id="whatsAppForm">
+                <div class="mb-4">
+                    <label for="whatsappSubject" class="block text-sm font-medium text-gray-700 mb-1">Assunto:</label>
+                    <input type="text" id="whatsappSubject" name="whatsappSubject" class="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500" placeholder="Ex: Consulta sobre Direito Civil" required>
+                </div>
+                <div class="mb-6">
+                    <label for="whatsappMessage" class="block text-sm font-medium text-gray-700 mb-1">Mensagem:</label>
+                    <textarea id="whatsappMessage" name="whatsappMessage" rows="4" class="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500" placeholder="Digite sua mensagem aqui..." required></textarea>
+                </div>
+                <button type="submit" class="w-full btn-primary py-3 px-6 rounded-lg text-lg font-semibold hover:shadow-lg transition duration-300">
+                    Enviar Mensagem
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Set current year in footer
+        const currentYearElement = document.getElementById('currentYear');
+        if (currentYearElement) {
+            currentYearElement.textContent = new Date().getFullYear();
+        }
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#') && href.length > 1) {
+                    e.preventDefault();
+                    const targetId = href; 
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        let offset = 0;
+                        const headerNav = document.getElementById('header-nav');
+                        if (targetId !== '#initial-hero' && headerNav && headerNav.classList.contains('sticky')) {
+                            offset = headerNav.offsetHeight;
+                        }
+                        
+                        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        const offsetPosition = elementPosition - offset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                    }
+                }
+            });
+        });
+
+        // WhatsApp Modal Logic
+        const whatsAppModal = document.getElementById('whatsAppModal');
+        const openWhatsAppModalBtn = document.getElementById('openWhatsAppModalBtn');
+        const closeWhatsAppModalBtn = document.getElementById('closeWhatsAppModalBtn');
+        const whatsAppForm = document.getElementById('whatsAppForm');
+        
+        const openModalBtnHeader = document.getElementById('openModalBtnHeader');
+        const openModalBtnMobile = document.getElementById('openModalBtnMobile');
+        const openModalBtnContentHero = document.getElementById('openModalBtnContentHero');
+
+        const yourWhatsAppNumber = "5511999999999"; // SUBSTITUA PELO SEU NÚMERO DE WHATSAPP COM CÓDIGO DO PAÍS
+
+        function openModal() {
+            if (whatsAppModal) {
+                 whatsAppModal.classList.remove('hidden');
+                 whatsAppModal.classList.add('flex');
+            }
+        }
+
+        function closeModal() {
+            if (whatsAppModal) {
+                whatsAppModal.classList.add('hidden');
+                whatsAppModal.classList.remove('flex');
+            }
+        }
+
+        if (openWhatsAppModalBtn) openWhatsAppModalBtn.addEventListener('click', openModal);
+        if (openModalBtnHeader) openModalBtnHeader.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+        if (openModalBtnMobile) openModalBtnMobile.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+        if (openModalBtnContentHero) openModalBtnContentHero.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+        if (closeWhatsAppModalBtn) closeWhatsAppModalBtn.addEventListener('click', closeModal);
+
+        if (whatsAppForm) {
+            whatsAppForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const subjectInput = document.getElementById('whatsappSubject');
+                const messageInput = document.getElementById('whatsappMessage');
+                
+                if (!subjectInput || !messageInput) return;
+
+                const subject = subjectInput.value;
+                const message = messageInput.value;
+
+                if (!yourWhatsAppNumber || yourWhatsAppNumber === "SEUNUMEROWHATSAPP" || yourWhatsAppNumber.trim() === "") {
+                    const alertDiv = document.createElement('div');
+                    alertDiv.style.position = 'fixed';
+                    alertDiv.style.top = '20px';
+                    alertDiv.style.left = '50%';
+                    alertDiv.style.transform = 'translateX(-50%)';
+                    alertDiv.style.backgroundColor = 'red';
+                    alertDiv.style.color = 'white';
+                    alertDiv.style.padding = '15px';
+                    alertDiv.style.borderRadius = '8px';
+                    alertDiv.style.zIndex = '1000';
+                    alertDiv.textContent = 'Número do WhatsApp não configurado. Por favor, edite o código.';
+                    document.body.appendChild(alertDiv);
+                    setTimeout(() => {
+                        if (document.body.contains(alertDiv)) {
+                             document.body.removeChild(alertDiv);
+                        }
+                    }, 5000);
+                    return;
+                }
+
+                const encodedSubject = encodeURIComponent(subject);
+                const encodedMessage = encodeURIComponent(message);
+                const whatsMeURL = `https://whats.me/${yourWhatsAppNumber}?text=Assunto:%20${encodedSubject}%0AMensagem:%20${encodedMessage}`;
+                
+                window.open(whatsMeURL, '_blank');
+                closeModal(); 
+                whatsAppForm.reset(); 
+            });
+        }
+        
+        if (whatsAppModal) {
+            whatsAppModal.addEventListener('click', function(event) {
+                if (event.target === whatsAppModal) {
+                    closeModal();
+                }
+            });
+        }
+
+        // Animated Background Canvas Script
+        const canvas = document.getElementById('animated-background');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let circles = [];
+            const numCircles = 5; // Number of circles
+            const primaryColorRGB = '10, 42, 77'; // #0A2A4D
+            const secondaryColorRGB = '192, 160, 98'; // #C0A062
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            class Circle {
+                constructor(x, y, radius, color, lineWidth, speed) {
+                    this.x = x || Math.random() * canvas.width * 10;
+                    this.y = y || Math.random() * canvas.height * 10;
+                    this.radius = radius || Math.random() * 50 + 20; // Initial radius
+                    this.minRadius = this.radius;
+                    this.maxRadius = this.radius + (Math.random() * 100 + 50); // How much it will expand
+                    this.color = color || (Math.random() > 0.5 ? `rgba(${primaryColorRGB}, ${Math.random() * 0.3 + 0.1})` : `rgba(${secondaryColorRGB}, ${Math.random() * 0.3 + 0.1})`);
+                    this.lineWidth = lineWidth || Math.random() * 1.5 + 0.5;
+                    this.speed = speed || (Math.random() * 0.3 + 0.1);
+                    this.opacity = 1;
+                    this.fading = false;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                    ctx.strokeStyle = this.color.replace(/,\s*\d?\.?\d*\)/, `, ${this.opacity})`); // Update opacity in color string
+                    ctx.lineWidth = this.lineWidth;
+                    ctx.stroke();
+                }
+
+                update() {
+                    if (!this.fading) {
+                        this.radius += this.speed;
+                        if (this.radius >= this.maxRadius) {
+                            this.fading = true;
+                        }
+                    } else {
+                        this.opacity -= 0.01; // Fade out speed
+                    }
+
+                    if (this.opacity <= 0) {
+                        // Reset circle
+                        this.x = Math.random() * canvas.width;
+                        this.y = Math.random() * canvas.height;
+                        this.radius = Math.random() * 50 + 20;
+                        this.minRadius = this.radius;
+                        this.maxRadius = this.radius + (Math.random() * 100 + 50);
+                        this.color = (Math.random() > 0.5 ? `rgba(${primaryColorRGB}, ${Math.random() * 0.3 + 0.1})` : `rgba(${secondaryColorRGB}, ${Math.random() * 0.3 + 0.1})`);
+                        this.opacity = 1;
+                        this.fading = false;
+                    }
+                    this.draw();
+                }
+            }
+
+            function initCircles() {
+                circles = [];
+                for (let i = 0; i < numCircles; i++) {
+                    circles.push(new Circle());
+                }
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+                ctx.fillStyle = 'rgba(255, 255, 255, 1)'; // Solid white background for the canvas itself
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                circles.forEach(circle => {
+                    circle.update();
+                });
+            }
+
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                // Re-initialize circles if needed, or just let them adapt
+                // For this animation, letting them adapt might be fine, or re-init for better distribution
+                initCircles(); 
+            });
+
+            resizeCanvas();
+            initCircles();
+            animate();
+        }
+
+    </script>
+</body>
+</html>
